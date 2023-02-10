@@ -20,20 +20,26 @@ public class SaveData : MonoBehaviour
             SaveToJson();
         }
 	}
-	public void SaveToJson() 
+    public void SaveToJson ()
     {
-        string inventoryData = JsonUtility.ToJson(inventory);
-        string filePath = Application.persistentDataPath + "/SaveData.json";
-        System.IO.File.WriteAllText(filePath, inventoryData);
+        try 
+        { 
+            string inventoryData = JsonUtility.ToJson(inventory);
+            string filePath = Application.persistentDataPath + "/SaveData.json";
+            System.IO.File.WriteAllText(filePath, inventoryData);
+        } catch { }
     }
 
-    public void LoadFromJson()
+    public void LoadFromJson ()
     {
-		string filePath = Application.persistentDataPath + "/SaveData.json";
-        string inventoryData = System.IO.File.ReadAllText(filePath);
+        try 
+        {
+            string filePath = Application.persistentDataPath + "/SaveData.json";
+            string inventoryData = System.IO.File.ReadAllText(filePath);
 
-        inventory = JsonUtility.FromJson<Inventory>(inventoryData);
-	}
+            inventory = JsonUtility.FromJson<Inventory>(inventoryData);
+        } catch { }
+    }
 }
 
 [System.Serializable]
