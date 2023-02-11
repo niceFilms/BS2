@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Windows;
 
 public class Setandloadpos : MonoBehaviour
 {
@@ -10,14 +11,15 @@ public class Setandloadpos : MonoBehaviour
 	SaveData inv;
 	public PlayerMovement movement;
 	public bool autosave;
-	int i;
+	int i = 0;
 
 	// Start is called before the first frame update
 	void Start ()
 	{
-		inv = GetComponent<SaveData>();
-		i = 0;
-		StartCoroutine(Load());
+		QuickSaveReader.Create("PLayer")
+					   .Read<Vector3>("invpos", (r) => { trns.position = r; })
+					   .Read<Quaternion>("invrot", (r) => { trns.rotation = r; });
+		i++;
 	}
 
 	// Update is called once per frame
@@ -29,11 +31,12 @@ public class Setandloadpos : MonoBehaviour
 			{
 				if (autosave)
 				{
-					inv.inventory.Position = trns.position;
-					inv.inventory.Rotation = trns.rotation;
 					Scene uscene = SceneManager.GetActiveScene();
-					inv.inventory.Level = uscene.name;
-					inv.save = true;
+					QuickSaveWriter.Create("Player")
+						.Write("invpos", trns.position)
+						.Write("invrot", trns.rotation)
+						.Write("Scene", uscene)
+						.Commit();
 				}
 			}
 		}
@@ -41,19 +44,11 @@ public class Setandloadpos : MonoBehaviour
 
 	public void SavePosition ()
 	{
-		inv.inventory.Position = trns.position;
-		inv.inventory.Rotation = trns.rotation;
 		Scene uscene = SceneManager.GetActiveScene();
-		inv.inventory.Level = uscene.name;
-		inv.save = true;
-		health Health = GetComponent<health>();
-		Health.Health = 1;
-	}
-	IEnumerator Load ()
-	{
-		yield return new WaitForEndOfFrame();
-		trns.position = inv.inventory.Position;
-		trns.rotation = inv.inventory.Rotation;
-		i = 1;
+		QuickSaveWriter.Create("Player")
+			.Write("invpos", trns.position)
+			.Write("invrot", trns.rotation)
+			.Write("Scene", uscene)
+			.Commit();
 	}
 }

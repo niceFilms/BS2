@@ -76,7 +76,7 @@ namespace CI.QuickSave
         {
             if (!Exists(key))
             {
-                throw new QuickSaveException("Key does not exists");
+                //throw new QuickSaveException("Key does not exists");
             }
 
             try
@@ -85,7 +85,7 @@ namespace CI.QuickSave
             }
             catch
             {
-                throw new QuickSaveException("Deserialisation failed");
+                //throw new QuickSaveException("Deserialisation failed");
             }
 
             return this;
