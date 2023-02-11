@@ -1,3 +1,4 @@
+using CI.QuickSave;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class Setandloadpos : MonoBehaviour
 	// Start is called before the first frame update
 	void Start ()
 	{
+		inv = GetComponent<SaveData>();
 		i = 0;
 		StartCoroutine(Load());
 	}
@@ -27,15 +29,11 @@ public class Setandloadpos : MonoBehaviour
 			{
 				if (autosave)
 				{
-					try
-					{
-						inv.inventory.Position = trns.position;
-						inv.inventory.Rotation = trns.rotation;
-						Scene uscene = SceneManager.GetActiveScene();
-						inv.inventory.Level = uscene.name;
-						inv.save = true;
-					}
-					catch { }
+					inv.inventory.Position = trns.position;
+					inv.inventory.Rotation = trns.rotation;
+					Scene uscene = SceneManager.GetActiveScene();
+					inv.inventory.Level = uscene.name;
+					inv.save = true;
 				}
 			}
 		}
@@ -53,8 +51,6 @@ public class Setandloadpos : MonoBehaviour
 	}
 	IEnumerator Load ()
 	{
-
-		inv = GetComponent<SaveData>();
 		yield return new WaitForEndOfFrame();
 		trns.position = inv.inventory.Position;
 		trns.rotation = inv.inventory.Rotation;

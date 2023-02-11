@@ -8,7 +8,7 @@ public class SaveData : MonoBehaviour
 
 	[HideInInspector] public bool save;
 
-	private void Awake ()
+	private void Start ()
 	{
         LoadFromJson();
 	}
@@ -22,23 +22,26 @@ public class SaveData : MonoBehaviour
 	}
     public void SaveToJson ()
     {
-        try 
-        { 
             string inventoryData = JsonUtility.ToJson(inventory);
             string filePath = Application.persistentDataPath + "/SaveData.json";
-            System.IO.File.WriteAllText(filePath, inventoryData);
-        } catch { }
+			File.WriteAllText(filePath, inventoryData);
     }
 
     public void LoadFromJson ()
     {
-        try 
+        string filePath = Application.persistentDataPath + "/SaveData.json";
+        if (File.Exists(filePath))
         {
-            string filePath = Application.persistentDataPath + "/SaveData.json";
-            string inventoryData = System.IO.File.ReadAllText(filePath);
-
+            string inventoryData = File.ReadAllText(filePath);
             inventory = JsonUtility.FromJson<Inventory>(inventoryData);
-        } catch { }
+        }
+        else
+        {
+			string inventoryData = JsonUtility.ToJson(inventory);
+			filePath = Application.persistentDataPath + "/SaveData.json";
+			File.WriteAllText(filePath, inventoryData);
+		}
+        
     }
 }
 
