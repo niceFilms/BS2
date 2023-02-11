@@ -23,11 +23,19 @@ public class SettingMenu : MonoBehaviour
 
     public TextMeshProUGUI FOVText;
 
+    public Toggle Fullscreen;
+
+    int i = 0;
+
 	Resolution[] resolutions;
 
 	private float val;
 
-	private void Start ()
+	private void Update ()
+	{
+        if (i != 6) { i++; }
+	}
+	private void Awake ()
 	{
         float idk = PlayerPrefs.GetFloat("FOV");
 
@@ -67,7 +75,7 @@ public class SettingMenu : MonoBehaviour
 		prefs = PlayerPrefs.GetFloat("FOV");
 		FOV.value = prefs;
         FOVText.text = "FOV: "+ prefs.ToString("0");
-		
+        Fullscreen.isOn = Screen.fullScreen;
 	}
 
 	public void SetVolume (float volume)
@@ -95,7 +103,10 @@ public class SettingMenu : MonoBehaviour
 
     public void SetFullscreen (bool isFullscreen)
     {
-        Screen.fullScreen = isFullscreen;
+        if (i >= 5)
+        {
+            Screen.fullScreen = isFullscreen;
+        }
     }
 
     public void SetResolution (int resolutionIndex)
