@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4958397472242097169}
   - component: {fileID: 3949389371215472921}
+  - component: {fileID: 8192848643622052156}
   m_Layer: 0
   m_Name: SaveData
   m_TagString: Untagged
@@ -49,3 +50,19 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
     items: []
+  save: 0
+--- !u!114 &8192848643622052156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4755805937305062840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784cf32e7c2d3924d90c5ee434536498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trns: {fileID: 0}
+  movement: {fileID: 0}
+  autosave: 1

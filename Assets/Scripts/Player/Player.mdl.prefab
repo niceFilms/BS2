@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2657380701120990965}
   - component: {fileID: 2657380701120990964}
   - component: {fileID: 2657380701120990967}
-  - component: {fileID: 1691318551500014686}
   m_Layer: 3
   m_Name: Player.mdl
   m_TagString: Untagged
@@ -34,7 +33,7 @@ Transform:
   - {fileID: 2657380701204635461}
   - {fileID: 2657380701483950139}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2657380701120990964
 MonoBehaviour:
@@ -88,21 +87,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1691318551500014686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2657380701120990966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 784cf32e7c2d3924d90c5ee434536498, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inv: {fileID: 0}
-  movement: {fileID: 2657380701120990964}
-  autosave: 1
 --- !u!1 &2657380701204635460
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +177,7 @@ GameObject:
   - component: {fileID: 2657380701650863988}
   - component: {fileID: 2657380701650863991}
   - component: {fileID: 2657380701650863986}
+  - component: {fileID: 8663957178811910789}
   m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -403,3 +388,15 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!114 &8663957178811910789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2657380701650863990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3905e8ffcc7934bb99e2dfbb20eb49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

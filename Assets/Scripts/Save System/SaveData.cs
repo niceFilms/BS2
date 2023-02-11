@@ -6,9 +6,9 @@ public class SaveData : MonoBehaviour
 {
     public Inventory inventory = new Inventory();
 
-	[HideInInspector] public static bool save;
+	[HideInInspector] public bool save;
 
-	private void Start ()
+	private void Awake ()
 	{
         LoadFromJson();
 	}
