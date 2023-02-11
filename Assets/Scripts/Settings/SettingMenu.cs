@@ -19,11 +19,15 @@ public class SettingMenu : MonoBehaviour
 
     public TextMeshProUGUI VolumeText;
 
-    public Slider FOV;
+	public Slider FOV;
 
-    public TextMeshProUGUI FOVText;
+	public TextMeshProUGUI FOVText;
 
-    public Toggle Fullscreen;
+	public Slider Sensitivity;
+
+	public TextMeshProUGUI SensitivityText;
+
+	public Toggle Fullscreen;
 
     int i = 0;
 
@@ -75,7 +79,10 @@ public class SettingMenu : MonoBehaviour
 		prefs = PlayerPrefs.GetFloat("FOV");
 		FOV.value = prefs;
         FOVText.text = "FOV: "+ prefs.ToString("0");
-        Fullscreen.isOn = Screen.fullScreen;
+		prefs = PlayerPrefs.GetFloat("Sensitivity");
+		Sensitivity.value = prefs;
+		SensitivityText.text = "Sensitivity: " + prefs.ToString("0");
+		Fullscreen.isOn = Screen.fullScreen;
 	}
 
 	public void SetVolume (float volume)
@@ -93,6 +100,13 @@ public class SettingMenu : MonoBehaviour
 	{
 		FOVText.text = "FOV: " + FOV.ToString("0");
 		PlayerPrefs.SetFloat("FOV", FOV);
+		PlayerPrefs.Save();
+	}
+
+	public void SetSensitivity (float Sensitivity)
+	{
+		SensitivityText.text = "Sensitivity: " + Sensitivity.ToString("0");
+		PlayerPrefs.SetFloat("Sensitivity", Sensitivity);
 		PlayerPrefs.Save();
 	}
 

@@ -11,6 +11,7 @@ public class MouseLook : MonoBehaviour
 
 	private void Awake ()
 	{
+		mS = PlayerPrefs.GetFloat("Sensitivity");
 	}
 	// Start is called before the first frame update
 	void Start ()
@@ -21,6 +22,7 @@ public class MouseLook : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		mS = PlayerPrefs.GetFloat("Sensitivity");
 		float mouseX = Input.GetAxis("Mouse X") * mS * Time.deltaTime;
 		float mouseY = Input.GetAxis("Mouse Y") * mS * Time.deltaTime;
 
