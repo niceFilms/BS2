@@ -1,61 +1,63 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Setandloadpos : MonoBehaviour
 {
-	public SaveData inv;
+	public Transform trns;
+	SaveData inv;
 	public PlayerMovement movement;
 	public bool autosave;
-	
+	int i;
+
 	// Start is called before the first frame update
 	void Start ()
 	{
-		try { this.transform.position = inv.inventory.Position; }
-		catch { }
-		try { this.transform.rotation = inv.inventory.Rotation; }
-		catch { }
+		i = 0;
+		StartCoroutine(Load());
 	}
 
 	// Update is called once per frame
-	void FixedUpdate ()
+	void Update ()
 	{
-		try { inv.inventory.Position = this.transform.position; }
-		catch { }
-		try { inv.inventory.Rotation = this.transform.rotation; }
-		catch { }
-		Scene uscene = SceneManager.GetActiveScene();
-		try { inv.inventory.Level = uscene.name; }
-		catch { }
-
-		if (autosave)
+		if (i == 1)
 		{
-			try
+			if (movement.isGrounded)
 			{
-				if (movement.isGrounded)
+				if (autosave)
 				{
-					if ((Time.time % 10) >= 9)
+					try
 					{
-						
-						try { inv.SaveToJson(); }
-						catch { }
+						inv.inventory.Position = trns.position;
+						inv.inventory.Rotation = trns.rotation;
+						Scene uscene = SceneManager.GetActiveScene();
+						inv.inventory.Level = uscene.name;
+						inv.save = true;
 					}
+					catch { }
 				}
 			}
-			catch { }
 		}
 	}
 
 	public void SavePosition ()
 	{
-		try { inv.inventory.Position = this.transform.position; }
-		catch { }
-		try { inv.inventory.Rotation = this.transform.rotation; }
-		catch { }
+		inv.inventory.Position = trns.position;
+		inv.inventory.Rotation = trns.rotation;
 		Scene uscene = SceneManager.GetActiveScene();
-		try { inv.inventory.Level = uscene.name; }
-		catch { }
-		inv.SaveToJson();
+		inv.inventory.Level = uscene.name;
+		inv.save = true;
 		health Health = GetComponent<health>();
 		Health.Health = 1;
+	}
+	IEnumerator Load ()
+	{
+
+		inv = GetComponent<SaveData>();
+		yield return new WaitForEndOfFrame();
+		trns.position = inv.inventory.Position;
+		trns.rotation = inv.inventory.Rotation;
+		i = 1;
 	}
 }
